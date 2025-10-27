@@ -140,9 +140,6 @@ app.get('/', (req, res) => {
 app.post('/contact', async (req, res) => {
   const { firstName, lastName, email, phone, message } = req.body;
 
-  console.log('Incoming contact form data:', req.body);
-  console.log('Using RESEND_API_KEY:', process.env.RESEND_API_KEY ? '✅ set' : '❌ missing');
-
   try {
     // Send mail to yourself
     await resend.emails.send({
@@ -160,7 +157,7 @@ app.post('/contact', async (req, res) => {
     });
 
     // Confirmation email to user
-    const result = await resend.emails.send({
+    await resend.emails.send({
       from: 'Satish <onboarding@resend.dev>',
       to: email,
       subject: 'Thank you for contacting me!',
@@ -173,8 +170,6 @@ app.post('/contact', async (req, res) => {
       `,
     });
 
-
-    console.log('Resend API result:', result);
     res.status(200).json({ code: 200, message: 'Message sent successfully!' });
   } catch (error) {
     console.error('Error sending email:', error);
