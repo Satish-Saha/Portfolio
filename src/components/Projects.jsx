@@ -7,12 +7,18 @@ import guess from "../assets/img/guess.png";
 import url from "../assets/img/url.png";
 import netflix from "../assets/img/netflix.png";
 import colorSharp2 from "../assets/img/color-sharp2.png";
+import chatbox from "../assets/img/chatbox.png";
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
 
 export const Projects = () => {
 
   const projects = [
+    {
+      title: "ChatBox AI",
+      description: "ChatBox AI a beginner-friendly chat application just to explore the basics of OpenAI's API and how to integrate it into a web application.",
+      imgUrl: chatbox,
+    },
     {
       title: "Sticky Note Application",
       description: "Sticky Notes Application using HTML,CSS and Javascript.",
@@ -52,46 +58,57 @@ export const Projects = () => {
           <Col size={12}>
             <TrackVisibility>
               {({ isVisible }) =>
-              <div className={isVisible ? "animate__animated animate__fadeIn": ""}>
-                <h2>Projects</h2>
-                <p>Projects are endeavors undertaken to achieve specific goals. They can vary widely, from building software applications and constructing infrastructure to conducting research and organizing events. Regardless of the field, successful projects require clear objectives, effective planning, efficient execution, and thorough evaluation to ensure desired outcomes are achieved.</p>
-                <p>These are some of my projects listed below:-</p>
-                <Tab.Container id="projects-tabs" defaultActiveKey="first">
-                  <Nav variant="pills" className="nav-pills mb-5 justify-content-center align-items-center" id="pills-tab">
-                    <Nav.Item>
-                      <Nav.Link eventKey="first">Tab 1</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link eventKey="second">Tab 2</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link eventKey="third">Tab 3</Nav.Link>
-                    </Nav.Item>
-                  </Nav>
-                  <Tab.Content id="slideInUp" className={isVisible ? "animate__animated animate__slideInUp" : ""}>
-                    <Tab.Pane eventKey="first">
-                      <Row>
-                        {
-                          projects.map((project, index) => {
-                            return (
-                              <ProjectCard
-                                key={index}
-                                {...project}
+                <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
+                  <h2>Projects</h2>
+                  <p>Projects are endeavors undertaken to achieve specific goals. They can vary widely, from building software applications and constructing infrastructure to conducting research and organizing events. Regardless of the field, successful projects require clear objectives, effective planning, efficient execution, and thorough evaluation to ensure desired outcomes are achieved.</p>
+                  <p>These are some of my projects listed below:-</p>
+                  <Tab.Container id="projects-tabs" defaultActiveKey="first">
+                    <Nav variant="pills" className="nav-pills mb-5 justify-content-center align-items-center" id="pills-tab">
+                      <Nav.Item>
+                        <Nav.Link eventKey="first">Tab 1</Nav.Link>
+                      </Nav.Item>
+                      <Nav.Item>
+                        <Nav.Link eventKey="second">Tab 2</Nav.Link>
+                      </Nav.Item>
+                      <Nav.Item>
+                        <Nav.Link eventKey="third">Tab 3</Nav.Link>
+                      </Nav.Item>
+                    </Nav>
+                    <Tab.Content id="slideInUp" className={isVisible ? "animate__animated animate__slideInUp" : ""}>
+                      <Tab.Pane eventKey="first">
+                        <Row>
+                          {
+                            projects.slice(0, 6).map((project, index) => {
+                              return (
+                                <ProjectCard
+                                  key={index}
+                                  {...project}
                                 />
-                            )
-                          })
-                        }
-                      </Row>
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="second">
-                      <p>Many More to come...</p>
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="third">
-                      <p>Many more to come...</p>
-                    </Tab.Pane>
-                  </Tab.Content>
-                </Tab.Container>
-              </div>}
+                              )
+                            })
+                          }
+                        </Row>
+                      </Tab.Pane>
+                      <Tab.Pane eventKey="second">
+                        <Row>
+                          {
+                            projects.slice(6).map((project, index) => {
+                              return (
+                                <ProjectCard
+                                  key={index + 6}
+                                  {...project}
+                                />
+                              )
+                            })
+                          }
+                        </Row>
+                      </Tab.Pane>
+                      <Tab.Pane eventKey="third">
+                        <p>Many more to come...</p>
+                      </Tab.Pane>
+                    </Tab.Content>
+                  </Tab.Container>
+                </div>}
             </TrackVisibility>
           </Col>
         </Row>

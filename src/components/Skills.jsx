@@ -40,7 +40,7 @@ export const Skills = () => {
       items: 1
     }
   };
-  
+
   const CustomLeftArrow = ({ onClick }) => {
     return (
       <button className="custom-arrow custom-left-arrow" onClick={onClick}>
@@ -57,7 +57,6 @@ export const Skills = () => {
     );
   };
 
-
   return (
     <section className="skill" id="skills">
       <div className="container">
@@ -65,7 +64,7 @@ export const Skills = () => {
           <div className="col-12">
             <div className="skill-bx wow zoomIn">
               <h2>Skills</h2>
-              <p>Skills are abilities honed through experience and learning, essential for tasks and success. They encompass diverse areas such as communication, problem-solving, technical proficiency, leadership, adaptability, and creativity, driving personal and professional growth.</p>
+              <p>Skills are abilities honed through experience and learning, essential for tasks and success. They encompass diverse areas such as problem-solving, technical proficiency, leadership, adaptability, and creativity, driving personal and professional growth.</p>
               <Carousel responsive={responsive} infinite={true} className="owl-carousel owl-theme skill-slider" customLeftArrow={<CustomLeftArrow />}
                 customRightArrow={<CustomRightArrow />} >
                 <div className="item">

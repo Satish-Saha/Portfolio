@@ -11,7 +11,7 @@ export const Banner = () => {
   const [text, setText] = useState('');
   const [delta, setDelta] = useState(300 - Math.random() * 100);
   const [index, setIndex] = useState(1);
-  const toRotate = [ "MERN Stack Developer", "Web Designer", "Web Developer" ];
+  const toRotate = ["Full Stack Developer", "MERN Stack Developer", "Web Developer"];
   const period = 2000;
 
   useEffect(() => {
@@ -54,19 +54,22 @@ export const Banner = () => {
           <Col xs={12} md={6} xl={7}>
             <TrackVisibility>
               {({ isVisible }) =>
-              <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
-                <span className="tagline">Welcome to my Portfolio</span>
-                <h1>{`Hi! I'm Satish Kr. Saha  `} <span className="txt-rotate" dataperiod="1000" data-rotate='[ "MERN Stack developer", "Web Designer", "Web Developer" ]'><span className="wrap">{text}</span></span></h1>
-                  <p>Hello there ! 👋I am Satish Kumar Saha, an efficient, results-oriented MERN Stack developer, with a passion for constant innovation and the ability to solve complex problems. With my keen eye for detail and passion for creating great customer experiences. I focus on transforming content into actionable and accessible solutions.</p>
-                  <button onClick={() => console.log('connect')}>Let’s Connect <ArrowRightCircle size={25} /></button>
-              </div>}
+                <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
+                  <span className="tagline">Welcome to my Portfolio</span>
+                  <h1>{`Hi! I'm Satish Kr. Saha  `} <span className="txt-rotate" dataperiod="1000" data-rotate='[ "MERN Stack developer", "Web Designer", "Web Developer" ]'><span className="wrap">{text}</span></span></h1>
+                  <p>Hello there ! 👋I am Satish Kumar Saha, an efficient, results-oriented Full Stack developer, with a passion for constant innovation and the ability to solve complex problems. With my keen eye for detail and passion for creating great customer experiences. I focus on transforming content into actionable and accessible solutions.</p>
+                  <button onClick={() => {
+                    let element = document.getElementById('connect');
+                    element && element.scrollIntoView({ behavior: 'smooth' });
+                  }}>Let's Connect <ArrowRightCircle size={25} /></button>
+                </div>}
             </TrackVisibility>
           </Col>
           <Col xs={12} md={6} xl={5}>
             <TrackVisibility>
               {({ isVisible }) =>
                 <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
-                  <img src={headerImg} alt="Header Img"/>
+                  <img src={headerImg} alt="Header Img" />
                 </div>}
             </TrackVisibility>
           </Col>
