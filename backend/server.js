@@ -29,29 +29,29 @@ app.use(cors({
 app.use(express.json());
 
 // Create transporter for nodemailer
-const transporter = nodemailer.createTransport({
-  service: 'gmail', // You can use other services like Outlook, Yahoo, etc.
-  auth: {
-    user: process.env.EMAIL_USER, // Your email
-    pass: process.env.EMAIL_PASS, // Your email password or app password
-  },
-});
-
 // const transporter = nodemailer.createTransport({
-//   host: 'smtp.gmail.com',
-//   port: 587,
-//   secure: false, // Use TLS
+//   service: 'gmail', // You can use other services like Outlook, Yahoo, etc.
 //   auth: {
-//     user: process.env.EMAIL_USER,
-//     pass: process.env.EMAIL_PASS,
+//     user: process.env.EMAIL_USER, // Your email
+//     pass: process.env.EMAIL_PASS, // Your email password or app password
 //   },
-//   tls: {
-//     rejectUnauthorized: false // Important for cloud deployment
-//   },
-//   connectionTimeout: 60000, // 60 seconds
-//   greetingTimeout: 30000,
-//   socketTimeout: 60000
 // });
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true, // Use SSL
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+  tls: {
+    rejectUnauthorized: false // Important for cloud deployment
+  },
+  connectionTimeout: 60000, // 60 seconds
+  greetingTimeout: 30000,
+  socketTimeout: 60000
+});
 
 // Test email configuration
 transporter.verify((error, success) => {
@@ -60,6 +60,10 @@ transporter.verify((error, success) => {
   } else {
     console.log('Email server is ready to send messages');
   }
+});
+
+app.get('/', (req, res) => {
+  res.send('Portfolio backend is running');
 });
 
 // Contact form endpoint
