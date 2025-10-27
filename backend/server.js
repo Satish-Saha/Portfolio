@@ -160,7 +160,7 @@ app.post('/contact', async (req, res) => {
     });
 
     // Confirmation email to user
-    await resend.emails.send({
+    const result = await resend.emails.send({
       from: process.env.EMAIL_USER,
       to: email,
       subject: 'Thank you for contacting me!',
@@ -173,7 +173,7 @@ app.post('/contact', async (req, res) => {
       `,
     });
 
-    
+
     console.log('Resend API result:', result);
     res.status(200).json({ code: 200, message: 'Message sent successfully!' });
   } catch (error) {
