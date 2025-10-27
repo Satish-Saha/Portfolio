@@ -108,10 +108,35 @@
 //   console.log(`Server running on port ${PORT}`);
 // });
 
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
 import { Resend } from 'resend';
 
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 5000;
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+// Middleware
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'https://portfolio-sigma-seven-ysbdo9ojh2.vercel.app'
+  ],
+  credentials: true
+}));
+
+app.use(express.json());
+
+// Root route
+app.get('/', (req, res) => {
+  res.send('Portfolio backend is running');
+});
+
+// Contact route
 app.post('/contact', async (req, res) => {
   const { firstName, lastName, email, phone, message } = req.body;
 
@@ -131,7 +156,7 @@ app.post('/contact', async (req, res) => {
       `,
     });
 
-    // Confirmation to user
+    // Confirmation email to user
     await resend.emails.send({
       from: 'Satish <onboarding@resend.dev>',
       to: email,
@@ -141,6 +166,7 @@ app.post('/contact', async (req, res) => {
         <p>I have received your message and will get back to you soon.</p>
         <p><strong>Your message:</strong></p>
         <p>${message}</p>
+        <p>— Satish</p>
       `,
     });
 
@@ -149,4 +175,8 @@ app.post('/contact', async (req, res) => {
     console.error('Error sending email:', error);
     res.status(500).json({ code: 500, message: 'Error sending message.' });
   }
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
