@@ -16,7 +16,16 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+// CORS configuration for production
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'https://your-frontend-domain.vercel.app' // Replace with your actual frontend domain
+  ],
+  credentials: true
+}));
+
 app.use(express.json());
 
 // Create transporter for nodemailer
@@ -60,7 +69,7 @@ app.post('/contact', async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
-    
+
     // Optional: Send confirmation email to the user
     const userConfirmation = {
       from: process.env.EMAIL_USER,
@@ -75,18 +84,18 @@ app.post('/contact', async (req, res) => {
         <p>Best regards,<br>Satish</p>
       `
     };
-    
+
     await transporter.sendMail(userConfirmation);
 
-    res.status(200).json({ 
-      code: 200, 
-      message: 'Message sent successfully!' 
+    res.status(200).json({
+      code: 200,
+      message: 'Message sent successfully!'
     });
   } catch (error) {
     console.error('Error sending email:', error);
-    res.status(500).json({ 
-      code: 500, 
-      message: 'Error sending message. Please try again later.' 
+    res.status(500).json({
+      code: 500,
+      message: 'Error sending message. Please try again later.'
     });
   }
 });
