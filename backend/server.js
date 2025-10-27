@@ -143,7 +143,7 @@ app.post('/contact', async (req, res) => {
   try {
     // Send mail to yourself
     await resend.emails.send({
-      from: 'Satish <onboarding@resend.dev>',
+      from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
       subject: `New Portfolio Message from ${firstName} ${lastName}`,
       html: `
@@ -158,7 +158,7 @@ app.post('/contact', async (req, res) => {
 
     // Confirmation email to user
     await resend.emails.send({
-      from: 'Satish <onboarding@resend.dev>',
+      from: process.env.EMAIL_USER,
       to: email,
       subject: 'Thank you for contacting me!',
       html: `
