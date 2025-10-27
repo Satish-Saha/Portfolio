@@ -146,7 +146,7 @@ app.post('/contact', async (req, res) => {
   try {
     // Send mail to yourself
     await resend.emails.send({
-      from: 'Satish <onboarding@resend.dev>',
+      from: 'Portfolio Alerts <onboarding@resend.dev>',
       to: process.env.EMAIL_USER,
       subject: `New Portfolio Message from ${firstName} ${lastName}`,
       html: `
@@ -161,7 +161,7 @@ app.post('/contact', async (req, res) => {
 
     // Confirmation email to user
     const result = await resend.emails.send({
-      from: process.env.EMAIL_USER,
+      from: 'Satish <onboarding@resend.dev>',
       to: email,
       subject: 'Thank you for contacting me!',
       html: `
