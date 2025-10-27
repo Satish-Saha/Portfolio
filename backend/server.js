@@ -143,7 +143,7 @@ app.post('/contact', async (req, res) => {
   try {
     // Send mail to yourself
     await resend.emails.send({
-      from: process.env.EMAIL_USER,
+      from: 'Satish <onboarding@resend.dev>',
       to: process.env.EMAIL_USER,
       subject: `New Portfolio Message from ${firstName} ${lastName}`,
       html: `
